@@ -83,8 +83,9 @@ class AdminController extends Controller{
 
         }else{
             $post = json_decode(Request::getPost('request'), true);
+            $userId = (int) $post['userId'];
             $userProfile = Query::getRow("SELECT * FROM userProfile
-                                          WHERE userId='{$post['userId']}'");
+                                          WHERE userId='{$userId}'");
             Loader::loadModel('UserRating');
             $userRating = new UserRating([], 'userRating');
             $keys = array_keys($post);
