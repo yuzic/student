@@ -9,14 +9,16 @@
    <th  width="10%"> Дата рождения </th>
    <th> Действия </th>
   </tr>
-<?php foreach ($this->studentList as $data):?>
+<?php
+Loader::loadHelper('Html');
+foreach ($this->studentList as $data):?>
     <tr class="table_rows" id="preload_<?php echo $data['userId'];?>"   userId="<?php echo $data['userId'];?>">
-        <td class="itcen"><?php echo $data['userId'];?> </td>
-        <td><?php echo $data['email'];?> </td>
-        <td><?php echo $data['firstName'];?> </td>
-        <td><?php echo $data['surname'];?> </td>
-        <td><?php echo $data['groupName'];?> </td>
-        <td><?php echo $data['dob'];?>г. </td>
+        <td class="itcen"><?php echo Html::encode($data['userId']);?> </td>
+        <td><?php echo Html::encode($data['email']);?> </td>
+        <td><?php echo Html::encode($data['firstName']);?> </td>
+        <td><?php echo Html::encode($data['surname']);?> </td>
+        <td><?php echo Html::encode($data['groupName']);?> </td>
+        <td><?php echo Html::encode($data['dob']);?>г. </td>
         <td>
             <a href="javascript:void(0)" class="user-delete">Удалить</a>
             <a href="javascript:void(0)" class="user-add-rating">Добавить оценки</a>

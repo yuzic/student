@@ -1,7 +1,7 @@
 <?
  return array('host' =>'localhost',
      'login'    => 'root',
-     'pass'     => '12345678',
+     'pass'     => 'virtc2012true',
      'dbname'   => 'student',
      'debug'    => true,
 );

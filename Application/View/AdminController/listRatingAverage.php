@@ -5,10 +5,11 @@
     </tr>
 <?php
 $sumRating = 0;
+Loader::loadHelper('Html');
 foreach ($this->listRating as $data):?>
     <tr  class="table_rows">
-        <td><?php echo $data['firstName'];?> <?php echo $data['surname'];?> </td>
-        <td><?php echo $data['ratingAvg'];?> </td>
+        <td><?php echo Html::encode($data['firstName']);?> <?php echo Html::encode($data['surname']);?> </td>
+        <td><?php echo Html::encode($data['ratingAvg']);?> </td>
     </tr>
 <?php endforeach;?>
 </table>

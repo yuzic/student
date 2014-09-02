@@ -46,7 +46,7 @@
             if (!is_null($sql)){
                 $query = mysqli_query(self::$connect, $sql);
                 if (!$query){
-                    throw  VException::mysqli(mysql_error()."<<<".$sql.">>>");
+                    throw  VException::mysqli(mysqli_error(self::$connect)."<<<".$sql.">>>");
                 }
                 return mysqli_insert_id(self::$connect);
             }

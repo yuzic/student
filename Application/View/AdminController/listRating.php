@@ -5,12 +5,13 @@
     </tr>
 <?php
 $sumRating = 0;
+Loader::loadHelper('Html');
 foreach ($this->listRating as $data):?>
     <tr  class="table_rows">
-        <td><?php echo $data['name'];?> </td>
+        <td><?php echo Html::encode($data['name']);?> </td>
         <td><?php
             $sumRating+= (int) $data['rating'];
-            echo $data['rating'];?>
+            echo Html::encode($data['rating']);?>
         </td>
     </tr>
 <?php endforeach;?>

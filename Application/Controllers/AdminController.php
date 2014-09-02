@@ -7,10 +7,12 @@ class AdminController extends Controller{
         if (!empty($post['email'])){
             Loader::loadModel('User');
             Loader::loadModel('UserProfile');
+            Loader::loadHelper('Html');
+            $post = Html::addslash($post);
             // user
             $user = new User([], 'user');
             $user->_data = [
-                'email' => $post['email'],
+                'email' => addslashes($post['email']),
                 'password' => md5($post['password'])
             ];
             $userId =   $user->save();
@@ -87,16 +89,15 @@ class AdminController extends Controller{
             $userRating = new UserRating([], 'userRating');
             $keys = array_keys($post);
             for($i=0; $i < count($keys);$i++){
-                //echo $post[$i];
                 $key = $keys[$i];
                 if (strpos(' '.$key, 'subject')){
                     $userRating->_data = [
-                    'userId' => $post['userId'],
-                    'userProfileId' => $userProfile['id'],
-                    'userSubjectId' => str_replace('subject_','',$key),
+                    'userId' => (int) $post['userId'],
+                    'userProfileId' => (int) $userProfile['id'],
+                    'userSubjectId' => (int) str_replace('subject_','',$key),
                     'semestrerId' => 1,
                     'teacherId' => 2,
-                    'rating' => $post[$key],
+                    'rating' => (int) $post[$key],
                     'schoolyear' => 2014,
 
                     ];
@@ -129,15 +130,17 @@ class AdminController extends Controller{
 
     public function actionDelete()
     {
-        Loader::loadModel('UserRating');
+        Loader::loadModel('User');
         $id = (int) Request::getPost('id');
         $user = new User([], 'user');
         $user->keySet($id);
-        $user->delete();
+        if ($user->delete())
+            echo json_encode(array('status' => 'ok'));
     }
 
     public function actionIndex()
     {
+        Loader::loadHelper('Html');
         $this->view->render('admin');
     }
 }
