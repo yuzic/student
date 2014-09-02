@@ -93,7 +93,7 @@ class AdminController extends Controller{
                 $key = $keys[$i];
                 if (strpos(' '.$key, 'subject')){
                     $userRating->_data = [
-                    'userId' => (int) $post['userId'],
+                    'userId' => $userId,
                     'userProfileId' => (int) $userProfile['id'],
                     'userSubjectId' => (int) str_replace('subject_','',$key),
                     'semestrerId' => 1,
